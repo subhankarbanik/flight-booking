@@ -1,11 +1,11 @@
 export interface FlightSearchResponse {
-    success: boolean;
+  data: {
     searchId: string;
+    provider: string;
+    success: boolean;
     result: {
       journeys: any;
       sectors: any;
-      searchQuery: any;
-      metaData:any;
-
     };
-  }
+  };
+}

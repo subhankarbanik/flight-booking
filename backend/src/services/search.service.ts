@@ -1,4 +1,4 @@
-// import { v4 as uuid } from "uuid";
+
 import Search from "../models/Search";
 import rawFlightData from "../data/flight.json";
 import { flattenFlights } from "../utils/flattenFlights";
@@ -10,7 +10,17 @@ export const performSearch = async (filters: any) => {
   const searchId = `${filters.from}-${filters.to}-${Date.now()}`;
 
 
-  let flights = flattenFlights(flightData.result);
+  let flights = flattenFlights(flightData.data.result);
+  // flights = flights.filter(f => {
+  //   const firstSegment = f.segments[0];
+  //   const lastSegment = f.segments[f.segments.length - 1];
+  
+  //   return (
+  //     firstSegment.origin === filters.from &&
+  //     lastSegment.destination === filters.to
+  //   );
+  // });
+  
 
 
   if (filters.stops !== undefined) {
@@ -25,7 +35,7 @@ export const performSearch = async (filters: any) => {
   await Search.create({
     searchId,
     payload: filters,
-    result: flightData.result
+    result: flightData.data.result
   });
 
 

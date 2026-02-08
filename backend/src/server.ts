@@ -2,11 +2,12 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import app from "./app";
 import { Request, Response } from "express";
+import rawFlightData from "./data/flight.json";
+import { FlightSearchResponse } from "./types/FlightSearch";
+import { flattenFlights } from "./utils/flattenFlights";
 
 dotenv.config();
-
-
-
+const flightData = rawFlightData as FlightSearchResponse;
 mongoose
   .connect(process.env.MONGO_URI as string)
   .then(() => console.log("MongoDB connected"))
