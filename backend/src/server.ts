@@ -10,7 +10,7 @@ dotenv.config();
 const flightData = rawFlightData as FlightSearchResponse;
 mongoose
   .connect(process.env.MONGO_URI as string)
-  .then(() => console.log("MongoDB connected"))
+  .then(() => console.log("MongoDB connected" , mongoose.connection.name))
   .catch(err => console.error(err));
 
 
@@ -20,7 +20,7 @@ mongoose
   });
 
 
-app.listen(4000, () => {
+app.listen(process.env.PORT || 4000, () => {
   console.log("Backend running on port 4000");
 });
 

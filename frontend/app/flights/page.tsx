@@ -142,7 +142,7 @@ export default function FlightsPage() {
       )}
 
       {flights.map(f => (
-        <div key={f.flightKey} style={{ border: "1px solid #ccc", padding: 10, margin: 10 }}>
+        <div key={f.flightKey} style={{ border: "1px solid #ccc", padding: 10, marginBottom: 10 }}>
           <p>Aitline : <strong> {f.airline}</strong></p>
           <p>Stops: {f.stops}</p>
           <p>Departure: {formatDateTime(f.departureTime)}</p>
