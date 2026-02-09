@@ -1,4 +1,4 @@
-const API_BASE = "https://flight-booking-mlmp.onrender.com";
+const API_BASE = "https://flight-booking-mlmp.onrender.com/api";
 
 export const searchFlights = async (payload: any) => {
   console.log("API payload", payload);
