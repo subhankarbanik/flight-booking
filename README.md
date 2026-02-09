@@ -1,57 +1,51 @@
-
 # Flight Search & Booking App
 
-A simple full-stack flight search and booking flow built using a static flight dataset.
-Focus is on correct flow, API design, and data handling.
+This is a simple full-stack flight search and booking app built as part of an assignment.  
+Main focus is on flow, APIs and data handling, not UI perfection.
 
 ---
 
-## Flow
-1. User searches flights (/flights)
-2. Matching flights are shown
+## Live App
+Frontend deployed on **Vercel**  (https://flight-booking-pi-eight.vercel.app/)
+Backend deployed on **Render**   (https://flight-booking-mlmp.onrender.com)
+Database used: **MongoDB Atlas**
+
+---
+
+## App Flow
+1. User searches flights
+2. Flight list is shown
 3. User selects a flight
-4. Redirect to /traveller
-5. Traveller details submitted
-6. Booking is created and confirmed
+4. Redirects to `/traveller`
+5. Traveller details filled
+6. Booking is created
+7. Confirmation page shows booking ID
 
 ---
 
-## Features Implemented
+## Features Done
 
 ### Flight Search
-- Source & Destination
+- From & To city
 - Departure date
-- One-way / Round-trip (round-trip blocked with message)
+- One way / Round trip (round trip blocked due to dataset)
 - Passenger count
 - Price range filter
 - Stops filter (0 / 1 / 2+)
-- Departure time range
+- Departure time filter
 
-Flights are filtered from the provided static JSON dataset.
-Each search generates a unique searchId and is stored in DB.
-
-### Flight Results
-Each flight shows:
-- Airline
-- Flight number(s)
-- Departure & arrival time
-- Duration
-- Stops
-- Price per passenger
-- Total price (passengers × fare)
-- Select button
+Flights are filtered from given static JSON data and stored with a unique `searchId`.
 
 ---
 
-### Select Flight
-POST /api/flight/select
-- Stores selected flight using searchId, flightKey and fareId
-- Saves full flight JSON, selected fare, and locks price
+### Flight Selection
+- Selected flight is saved using `searchId`
+- Fare is locked
+- Full flight JSON is stored
 
 ---
 
-### Traveller Details
-Form fields:
+### Traveller Form
 - Name
 - Email
 - Phone
@@ -62,31 +56,30 @@ Form fields:
 ---
 
 ### Booking
-POST /api/booking
-- Attaches traveller to selected flight
-- Uses locked price
-- Generates bookingId
-- Saves booking with CONFIRMED status
+- Traveller attached to selected flight
+- Locked price used
+- Booking ID generated
+- Status saved as CONFIRMED
 
 ---
 
-## Tech Stack
+## Tech Used
 Frontend: Next.js, React, TypeScript  
 Backend: Node.js, Express, TypeScript  
-Database: MongoDB (Mongoose)
+DB: MongoDB (Mongoose)
 
 ---
 
 ## Limitations
-- No round-trip support (dataset limitation)
-- No authentication
-- No seat selection or add-ons
+- No round trip booking
+- No login or auth
 - No payment gateway
 - Static flight data only
+- Filter based on departure date is not fully applied due to data restriction
 
 ---
 
 ## Notes
 - Price is locked at flight selection
-- Passenger count affects total price only
-- Designed to match assignment flow, not production scale
+- Passenger count affects total price
+- Built as per assignment flow
