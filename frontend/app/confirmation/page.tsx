@@ -2,14 +2,14 @@
 
 import { useSearchParams } from "next/navigation";
 
-export default function ConfirmationPage() {
-  const params = useSearchParams();
+export default function ConfirmationClient() {
+  const searchParams = useSearchParams();
+  const bookingId = searchParams.get("bookingId");
 
   return (
-    <div style={{ padding: 20 }}>
-      <h2>Booking Confirmed ,YAY</h2>
-      <p>Booking ID: {params.get("bookingId")}</p>
-      <p>Status: CONFIRMED</p>
+    <div>
+      <h2>Booking Confirmed</h2>
+      <p>Booking ID: {bookingId}</p>
     </div>
   );
 }
