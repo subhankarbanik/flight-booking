@@ -1,8 +1,10 @@
+
+
 import mongoose from "mongoose";
 
 const BookingSchema = new mongoose.Schema(
   {
-    bookingId: { type: String, required: true, unique: true },
+    bookingId: { type: String, required: true },
     searchId: { type: String, required: true },
     selectedFlightId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +19,7 @@ const BookingSchema = new mongoose.Schema(
       gender: String,
       passport: String
     },
-    finalPrice: Number,
+    finalPrice: { type: Number, required: true },
     status: { type: String, default: "CONFIRMED" }
   },
   { timestamps: true }

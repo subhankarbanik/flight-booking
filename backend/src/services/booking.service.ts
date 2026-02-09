@@ -1,16 +1,25 @@
+
+
 import SelectedFlight from "../models/SelectedFlight";
 import Booking from "../models/Booking";
 
 export const handleBooking = async (payload: any) => {
   const { searchId, traveller } = payload;
 
+  if (
+    !traveller?.name ||
+    !traveller?.email ||
+    !traveller?.phone ||
+    !traveller?.dob ||
+    !traveller?.gender
+  ) {
+    throw new Error("Missing traveller details");
+  }
 
   const selected = await SelectedFlight.findOne({ searchId });
   if (!selected) throw new Error("No flight selected");
 
-
   const bookingId = `BK-${Date.now()}`;
-
 
   const booking = await Booking.create({
     bookingId,

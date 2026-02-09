@@ -13,10 +13,14 @@ export default function TravellerPage() {
     name: "",
     email: "",
     phone: "",
-    gender: ""
+    dob: "",
+    gender: "",
+    passport: ""
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -26,22 +30,49 @@ export default function TravellerPage() {
       return;
     }
 
-    const res = await createBooking({
-      searchId,
-      traveller: form
-    });
+    const { name, email, phone, dob, gender } = form;
 
-    router.push(`/confirmation?bookingId=${res.bookingId}`);
+    if (!name || !email || !phone || !dob || !gender) {
+      alert("All required fields must be filled");
+      return;
+    }
+
+    try {
+      const res = await createBooking({
+        searchId,
+        traveller: form
+      });
+
+      router.push(`/confirmation?bookingId=${res.bookingId}`);
+    } catch (err) {
+      console.error(err);
+      alert("Booking failed");
+    }
   };
 
   return (
-    <div>
+    <div style={{ padding: 20, }}>
       <h2>Traveller Details</h2>
 
-      <input name="name" placeholder="Name" onChange={handleChange} />
+      <input name="name" placeholder="Full Name" onChange={handleChange} />
       <input name="email" placeholder="Email" onChange={handleChange} />
       <input name="phone" placeholder="Phone" onChange={handleChange} />
-      <input name="gender" placeholder="Gender" onChange={handleChange} />
+
+      <input type="date" name="dob" onChange={handleChange} />
+
+      <select style={{marginRight:'10px'}} name="gender" onChange={handleChange}>
+        <option value="">Select Gender</option>
+        <option value="MALE">Male</option>
+        <option value="FEMALE">Female</option>
+        <option value="OTHER">Other</option>
+      </select>
+
+       <input
+       style={{marginRight:'10px'}}
+        name="passport"
+        placeholder="Passport Number (optional)"
+        onChange={handleChange}
+       />
 
       <button onClick={handleBooking}>Confirm Booking</button>
     </div>
